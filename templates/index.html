@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19:data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: none;
+            background-color: rgb(255, 255, 255);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .maindiv {
+            width: 90%;
+            margin-left: 5%;
+            box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.5);
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="maindiv">
+        <h1
+            style="box-shadow:0px 1px 2px 1px rgba(0,0,0,0.5);text-align:center;font-family:Verdana, Geneva, Tahoma, sans-serif;background-color:rgb(184, 184, 184);">
+            Covid-19 Data Hub</h1>
+        <h3 style="font-family:Verdana;color:rgb(211, 36, 36);">Covid-19 WorldWide Cases</h3>
+        <div class=" card-deck m-auto">
+            <div class="card bg-danger text-white text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Cases</h5>
+                    <p class="card-text">{{ TotalConfirmed }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card bg-primary text-white text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Deaths</h5>
+                    <p class="card-text">{{ TotalDeaths }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card bg-success text-white text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Recovered</h5>
+                    <p class="card-text">{{ TotalRecovered }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="overflow-scroll" style="height:400px;background-color:aquamarine;margin:1%;overflow:scroll;">
+            <table border="2px" width="100%">
+                <tr>
+                    <th>Sr.No.</th>
+                    <th>Country Name</th>
+                    <th>Total Confirmed</th>
+                    <th>New Confirmed</th>
+                    <th>Total Deaths</th>
+                    <th>New Deaths</th>
+                    <th>Total Recovered</th>
+                    <th>New Recovered</th>
+                </tr>
+                <script>
+                    let i = 1;
+                </script>
+                {% for data in country_data %}
+                <tr>
+                    <td>
+                        <script>document.write(i++);</script>
+                    </td>
+                    <td>{{data.Country}}</td>
+                    <td>{{ data.TotalConfirmed }}</td>
+                    <td>{{ data.NewConfirmed }}</td>
+                    <td>{{ data.TotalDeaths }}</td>
+                    <td>{{ data.NewDeaths }}</td>
+                    <td>{{ data.TotalRecovered }}</td>
+                    <td>{{ data.NewRecovered }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <h3 style="font-family:Verdana;color:rgb(211, 36, 36);">Covid-19 Cases From India</h3>
+        <div class="card-deck m-auto" style="padding-bottom:20px;">
+            {% for data in india %}
+            <div class="card bg-secondary text-white text-center" style="background-color:silver;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Cases</h5>
+                    <p class="card-text">{{ data.TotalConfirmed }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card bg-secondary text-white text-center" style="background-color:silver;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Deaths</h5>
+                    <p class="card-text">{{ data.TotalDeaths }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card bg-secondary text-white text-center" style="background-color:silver;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Recovered</h5>
+                    <p class="card-text">{{ data.TotalRecovered }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="overflow-scroll" style="height:400px;background-color:aquamarine;margin:1%;overflow:scroll;">
+            <table border="2px" width="100%">
+                <tr>
+                    <th>Sr.No.</th>
+                    <th>State/Region</th>
+                    <th>Total Confirmed</th>
+                    <th>New Confirmed</th>
+                    <th>Total Deaths</th>
+                    <th>New Deaths</th>
+                    <th>Total Recovered</th>
+                    <th>New Recovered</th>
+                </tr>
+                <script>
+                    let k = 1;
+                </script>
+
+                {% for data in india_regions %}
+                <td>
+                    <script>document.write(k++);</script>
+                </td>
+                <td>{{ data.Region }}</td>
+                <td>{{ data.TotalConfirmed }}</td>
+                <td>{{ data.NewConfirmed }}</td>
+                <td>{{ data.TotalDeaths }}</td>
+                <td>{{ data.NewDeaths }}</td>
+                <td>{{ data.TotalRecovered }}</td>
+                <td>{{ data.NewRecovered }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
