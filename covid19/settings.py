@@ -80,14 +80,11 @@ WSGI_APPLICATION = 'covid19.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'covid',
-        'USER': 'covidroot',
-        'PASSWORD': 'covidroot',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'autocommit': True,
-        },
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
